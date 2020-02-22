@@ -11,3 +11,4 @@ The following config variables have to be set:
 - `BOT_TOKEN` -- telegram bot token
 - `HEROKU_URL` -- set it to the application domain so that webhook could be set
 - `BOT_SET_WEBHOOK` -- should be defined
+- `WEB_CONCURRENCY` -- should be 1
