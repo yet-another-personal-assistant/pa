@@ -5,5 +5,7 @@ Currently this is just a Telegram bot that doesn't understand anything
 
 ### Configuration
 
-The application expects a `token.txt` file in its working
-directory. The file should contain the telegram bot token.
+The application requires a file containing the telegram bot token. If
+`TOKEN_FILE` environment variable is defined it should be the path to
+token file. Otherwise use a `token.txt` file in the current working
+directory.
