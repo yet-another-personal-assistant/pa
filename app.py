@@ -5,17 +5,22 @@ import telepot
 import telepot.loop
 
 
-with open('token.txt') as tok:
-    TOKEN = tok.read().strip()
+def main():
+    with open('token.txt') as tok:
+        TOKEN = tok.read().strip()
 
-BOT = telepot.Bot(TOKEN)
+    BOT = telepot.Bot(TOKEN)
 
-def handle(msg):
-    sender = msg['from']['id']
-    chat = msg['chat']['id']
-    if msg['chat']['type'] == 'private':
-        BOT.sendMessage(chat, "Я не поняла")
-        BOT.sendMessage(chat, f"А что значит \"{msg['text']}\"?")
+    def handle(msg):
+        sender = msg['from']['id']
+        chat = msg['chat']['id']
+        if msg['chat']['type'] == 'private':
+            BOT.sendMessage(chat, "Я не поняла")
+            BOT.sendMessage(chat, f"А что значит \"{msg['text']}\"?")
 
-BOT.deleteWebhook()
-telepot.loop.MessageLoop(BOT, handle).run_forever()
+    BOT.deleteWebhook()
+    telepot.loop.MessageLoop(BOT, handle).run_forever()
+
+
+if __name__ == '__main__':
+    main()
