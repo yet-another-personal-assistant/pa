@@ -14,23 +14,23 @@ directory.
 
 PA-TG communication protocol is based on [PA infrastructure protocol].
 
-#### `from-tg` messages
+#### "from-tg" messages
 
 For each private text message received from Telegram PA-TG sends to
 brain a message using the following format:
 
-- `to`: `{"media": "brain", "name": "niege"}`
-- `from`: `{"media": "tg", "user_id": "<user_id>"}`
+- `to`: `{"channel": "brain", "name": "niege"}`
+- `from`: `{"channel": "tg", "user_id": "<user_id>"}`
 - `text`: `"<message text>"`
 
 Non-private or non-text messages are silently discarded.
 
-#### `from-brain` messages
+#### "from-brain" messages
 
 PA-TG accepts messages from brain in the following format:
 
-- `to`: `{"media": "tg", "chat_id": "<chat_id>"}`
-- `from`: `{"media": "brain", "name": "niege"}`
+- `to`: `{"channel": "tg", "chat_id": "<chat_id>"}`
+- `from`: `{"channel": "brain", "name": "niege"}`
 - `text`: one message or a list of messages to be sent
 
 
