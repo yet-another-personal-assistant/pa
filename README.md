@@ -14,6 +14,15 @@ directory.
 
 PA-TG communication protocol is based on [PA infrastructure protocol].
 
+PA-TG connects to STOMP server using the following connection
+parameters:
+
+- host: localhost
+- port: 61613
+- username: N/A
+- password: N/A
+- queue: "tg"
+
 #### "from-tg" messages
 
 For each private text message received from Telegram PA-TG sends to

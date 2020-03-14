@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import os
 
-
+import stomp
 from tg import Tg
 
 
@@ -10,7 +10,9 @@ def main():
     with open(token_file) as tok:
         TOKEN = tok.read().strip()
 
-    tg = Tg(TOKEN)
+    stomp_connection = stomp.Connection([('localhost', 61613)])
+    tg = Tg(TOKEN, stomp_connection)
+
     tg.run_forever()
 
 
