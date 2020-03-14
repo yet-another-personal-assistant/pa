@@ -22,7 +22,7 @@ class Tg(stomp.ConnectionListener):
 
     def __init__(self, token, conn):
         self.bot = telepot.Bot(token)
-        self.conn = conn
+        self.connection = conn
 
     def handle(self, msg):
         sender = msg['from']['id']
