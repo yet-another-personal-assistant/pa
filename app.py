@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
+import logging
 import os
+import sys
 
 import stomp
 from tg import Tg
@@ -17,4 +19,7 @@ def main():
 
 
 if __name__ == '__main__':
+    logging.getLogger('urllib3').setLevel(logging.INFO)
+    logging.basicConfig(stream=sys.stderr,
+                        level=logging.DEBUG)
     main()
