@@ -33,7 +33,7 @@ class Tg(stomp.ConnectionListener):
 
     def connect(self):
         self.connection.connect(wait=True)
-        self.connection.subscribe(destination="tg")
+        self.connection.subscribe(destination="tg", id=1)
 
     def run_forever(self):
         self.connection.set_listener('', self)
