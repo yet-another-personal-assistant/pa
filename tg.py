@@ -34,6 +34,7 @@ class Tg(stomp.ConnectionListener):
     def connect(self):
         self.connection.connect(wait=True)
         self.connection.subscribe(destination="tg", id=1)
+        _LOGGER.info("Connected to stomp server")
 
     def run_forever(self):
         self.connection.set_listener('', self)
@@ -46,14 +47,18 @@ class Tg(stomp.ConnectionListener):
 
     def on_message(self, headers, message):
         _LOGGER.debug('received a message: %s', message)
-        msg = json.loads(message)
         try:
+            msg = json.loads(message)
             chat_id = msg['to']['chat_id']
             messages = msg['text']
+        except json.decoder.JSONDecodeError:
+            _LOGGER.error("Malformed message (not json): %s", message)
+            return
         except KeyError:
             _LOGGER.error("Malformed message: %s", message)
             return
         _for_each(messages, partial(self.bot.sendMessage, chat_id))
 
     def on_disconnected(self):
+        _LOGGER.info("Connection to stomp server lost, reconnecting...")
         self.connect()
