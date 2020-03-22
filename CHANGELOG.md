@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Protocol description
 - gitlab-ci compliance scanning
 - basic testing
-- xtomp connection (listen only)
+- xtomp connection
+### Removed
+- Do not respond to messages
 
 ## [0.3.0] - 2020-03-11
 ### Added

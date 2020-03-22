@@ -18,6 +18,15 @@ def _for_each(maybe_list, func):
         func(maybe_list)
 
 
+def make_message(msg):
+    _LOGGER.debug("Message:\n%s\n", msg)
+    return json.dumps({"to": {"channel": "brain", "name": "niege"},
+                       "from": {"channel": "tg",
+                                "chat_id": msg['chat']['id'],
+                                "user_id": msg['from']['id']},
+                       "text": msg['text']})
+
+
 class Tg(stomp.ConnectionListener):
 
     def __init__(self, token, conn):
@@ -27,9 +36,8 @@ class Tg(stomp.ConnectionListener):
     def handle(self, msg):
         sender = msg['from']['id']
         chat = msg['chat']['id']
-        if msg['chat']['type'] == 'private':
-            self.bot.sendMessage(chat, "Я не поняла")
-            self.bot.sendMessage(chat, f"А что значит \"{msg['text']}\"?")
+        if 'text' in msg:
+            self.connection.send(body=make_message(msg), destination='brain')
 
     def connect(self):
         self.connection.connect(wait=True)

@@ -29,10 +29,11 @@ For each private text message received from Telegram PA-TG sends to
 brain a message using the following format:
 
 - `to`: `{"channel": "brain", "name": "niege"}`
-- `from`: `{"channel": "tg", "user_id": "<user_id>"}`
+- `from`: `{"channel": "tg", "user_id": "<user_id>", "chat_id": "<chat_id>"}`
 - `text`: `"<message text>"`
 
-Non-private or non-text messages are silently discarded.
+Non-text messages are silently discarded. `user_id` and `chat_id` are
+different for non-private chats.
 
 #### "from-brain" messages
 
