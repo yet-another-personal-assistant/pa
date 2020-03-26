@@ -12,7 +12,9 @@ def main():
     with open(token_file) as tok:
         TOKEN = tok.read().strip()
 
-    stomp_connection = stomp.Connection([('localhost', 61613)])
+    # xtomp loses connection if heartbeats are disabled
+    stomp_connection = stomp.Connection([('localhost', 61613)],
+                                        heartbeats=(120000,180000))
     tg = Tg(TOKEN, stomp_connection)
 
     tg.run_forever()
