@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - Enable heartbeats on stomp connection
+- Removed protocol details from README
 
 ## [0.4.0] - 2020-03-23
 ### Added
