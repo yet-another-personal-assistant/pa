@@ -12,8 +12,6 @@ nosetests:
   before_script:
     - apt-get update -q -y
     - apt-get install -y python-pip
-    - python -V
-    - echo "hello world"
     - pip install -r requirements-dev.txt
   script:
     - nosetests

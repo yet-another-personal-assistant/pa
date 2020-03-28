@@ -8,6 +8,7 @@ import telepot.loop
 
 
 _LOGGER = logging.getLogger(__name__)
+_CHANNEL = "tg"
 
 
 def _for_each(maybe_list, func):
@@ -21,7 +22,7 @@ def _for_each(maybe_list, func):
 def make_message(msg):
     _LOGGER.debug("Message:\n%s\n", msg)
     return json.dumps({"to": {"channel": "brain", "name": "niege"},
-                       "from": {"channel": "tg",
+                       "from": {"channel": _CHANNEL,
                                 "chat_id": msg['chat']['id'],
                                 "user_id": msg['from']['id']},
                        "text": msg['text']})
@@ -34,14 +35,12 @@ class Tg(stomp.ConnectionListener):
         self.connection = conn
 
     def handle(self, msg):
-        sender = msg['from']['id']
-        chat = msg['chat']['id']
         if 'text' in msg:
             self.connection.send(body=make_message(msg), destination='brain')
 
     def connect(self):
         self.connection.connect(wait=True)
-        self.connection.subscribe(destination="tg", id=1)
+        self.connection.subscribe(destination=_CHANNEL, id=1)
         _LOGGER.info("Connected to stomp server")
 
     def run_forever(self):
