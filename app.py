@@ -35,8 +35,8 @@ def main(args):
 
     stomp_host = config.get('stomp', 'host', fallback='localhost')
     stomp_port = config.getint('stomp', 'port', fallback=61613)
-    heartbeat_in = config.get('stomp', 'heartbeat_in', fallback=0)
-    heartbeat_out = config.get('stomp', 'heartbeat_out', fallback=0)
+    heartbeat_in = config.getint('stomp', 'heartbeat_in', fallback=0)
+    heartbeat_out = config.getint('stomp', 'heartbeat_out', fallback=0)
     stomp_connection = stomp.Connection([(stomp_host, stomp_port)],
                                         heartbeats=(heartbeat_in,heartbeat_out))
     tg = Tg(TOKEN, stomp_connection)
